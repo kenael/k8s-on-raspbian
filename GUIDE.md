@@ -1,3 +1,13 @@
+## Some Changes and Updates
+
+I build Kubernetes-Cluster with Raspberry PI 3 b+, base on this Guide from Alex Ellis.
+
+Kubernetes Version 1.13.4
+Raspbian Version 9.4
+Docker-CE Version 18.09.0
+
+I add Notes, where i found changes.
+
 # Kubernetes on (vanilla) Raspbian Lite
 
 Yes - you can create a Kubernetes cluster with Raspberry Pis with the default operating system called Raspbian. This means you can carry on using all the tools and packages you're used to with the officially-supported OS.
@@ -20,7 +30,7 @@ You can either follow the steps below, or use my flashing script which automates
 
 [Provision a Raspberry Pi SD card](https://gist.github.com/alexellis/a7b6c8499d9e598a285669596e9cdfa2)
 
-Then run: 
+Then run:
 
 ```
 curl -sLSf https://gist.githubusercontent.com/alexellis/fdbc90de7691a1b9edb545c17da2d975/raw/125ad6eae27e40a235412c2b623285a089a08721/prep.sh | sudo sh
@@ -121,7 +131,7 @@ $ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key a
 * You now have two new commands installed:
  * kubeadm - used to create new clusters or join an existing one
  * kubectl - the CLI administration tool for Kubernetes
- 
+
 * Pre-pull images
 
 `kubeadm` now has a command to pre-pull the requisites Docker images needed to run a Kubernetes master, type in:
@@ -146,7 +156,7 @@ If using Flannel:
 $ sudo kubeadm init --token-ttl=0 --pod-network-cidr=10.244.0.0/16
 ```
 
-We pass in `--token-ttl=0` so that the token never expires - do not use this setting in production. The UX for `kubeadm` means it's currently very hard to get a join token later on after the initial token has expired. 
+We pass in `--token-ttl=0` so that the token never expires - do not use this setting in production. The UX for `kubeadm` means it's currently very hard to get a join token later on after the initial token has expired.
 
 > Optionally also pass `--apiserver-advertise-address=192.168.0.27` with the IP of the Pi as found by typing `ifconfig`.
 
@@ -188,7 +198,7 @@ kube-controller-manager-of-2   1/1       Running   1          11m
 kube-dns-66ffd5c588-d8292      3/3       Running   0          11m                
 kube-proxy-xcj5h               1/1       Running   0          11m                
 kube-scheduler-of-2            1/1       Running   0          11m                
-weave-net-zz9rz                2/2       Running   0          5m 
+weave-net-zz9rz                2/2       Running   0          5m
 ```
 
 You should see the "READY" count showing as 1/1 for all services as above. DNS uses three pods, so you'll see 3/3 for that.
@@ -198,7 +208,7 @@ You should see the "READY" count showing as 1/1 for all services as above. DNS u
 Some users have reported stability issues with Weave Net on ARMHF. These issues do not appear to affect x86_64 (regular PCs/VMs). You may want to try Flannel instead of Weave Net for your RPi cluster.
 
 #### Weave Net
-
+*Alternativ: copy myscript/run_on_pi and myscript/network.yml*
 Install [Weave Net](https://www.weave.works/oss/net/) network driver
 
 ```
@@ -248,8 +258,9 @@ k8s-2     Ready      10m       v1.7.4
 ```
 
 ## Deploy a container
+*This part automated in "myscript/dashb_firstapp.sh", the Script install Dashboard, Testcontainer, User for Dashboard and Roles*
 
-This container will expose a HTTP port and convert Markdown to HTML. Just post a body to it via `curl` - follow the instructions below. 
+This container will expose a HTTP port and convert Markdown to HTML. Just post a body to it via `curl` - follow the instructions below.
 
 *function.yml*
 
@@ -296,7 +307,7 @@ Deploy and test:
 $ kubectl create -f function.yml
 ```
 
-Once the Docker image has been pulled from the hub and the Pod is running you can access it via `curl`: 
+Once the Docker image has been pulled from the hub and the Pod is running you can access it via `curl`:
 
 ```
 $ curl -4 http://127.0.0.1:31118 -d "# test"
