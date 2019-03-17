@@ -2,9 +2,9 @@
 
 I build Kubernetes-Cluster with Raspberry PI 3 b+, base on this Guide from Alex Ellis.
 
-Kubernetes Version 1.13.4
-Raspbian Version 9.4
-Docker-CE Version 18.09.0
+Kubernetes Version 1.13.4  
+Raspbian Version 9.4  
+Docker-CE Version 18.09.0  
 
 I add Notes, where i found changes.
 

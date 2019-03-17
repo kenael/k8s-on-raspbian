@@ -1,5 +1,7 @@
 ## Kubernetes on Raspbian
-
+*Fork from https://github.com/alexellis/k8s-on-raspbian, for my Setup need some Changes*  
+*Look at follow Guide*  
+    
 This repository holds the original tutorial for "Kubernetes on Raspbian" / Raspberry Pi by Alex Ellis
 
 ![](https://pbs.twimg.com/media/DKGfQ7bWkAAkGb9.jpg)
@@ -52,7 +54,7 @@ Submit your cluster and description by creating a GitHub issue.
 
 Contributions are welcome, but must be tested and justified.
 
-Please make sure each commit is signed off with `git commit -s` (this means don't edit in the GitHub UI). 
+Please make sure each commit is signed off with `git commit -s` (this means don't edit in the GitHub UI).
 
 See below for more information.
 
